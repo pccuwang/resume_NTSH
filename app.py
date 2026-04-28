@@ -65,8 +65,7 @@ def stock():
         # 3. 查詢股票號碼的對應股價
 
         answer = data["data"][-1][6]
-            import requests
-    
+   
     
     # API URL
     url = f"https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&stockNo={stock_no}"

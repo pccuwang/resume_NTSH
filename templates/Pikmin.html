@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Pikmin｜我的遊戲介紹</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        body {
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        /* 頁首 */
+
+        .pikmin-header {
+            min-height: 55vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.75),
+                    rgba(255,255,255,0.9)
+                ),
+                url("{{ url_for(
+                    'static',
+                    filename='images/pikmin-header.jpg'
+                ) }}");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pikmin-header h1 {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .pikmin-header p {
+            font-size: 21px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+        }
+
+
+        /* 主要內容 */
+
+        .pikmin-container {
+            max-width: 1100px;
+            margin: auto;
+
+            padding: 70px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 36px;
+
+            margin-bottom: 40px;
+        }
+
+
+        /* 遊戲介紹 */
+
+        .intro {
+            display: flex;
+
+            align-items: center;
+
+            gap: 45px;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+            margin-bottom: 60px;
+        }
+
+        .intro img {
+            width: 45%;
+
+            border-radius: 15px;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-text h2 {
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+        .intro-text p {
+            font-size: 17px;
+
+            line-height: 1.9;
+        }
+
+
+        /* Pikmin 種類 */
+
+        .pikmin-types {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+            margin-bottom: 60px;
+        }
+
+        .type-card {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .type-card img {
+
+            width: 130px;
+            height: 130px;
+
+            object-fit: contain;
+
+            margin-bottom: 15px;
+        }
+
+        .type-card h3 {
+
+            font-size: 24px;
+
+            margin-bottom: 10px;
+        }
+
+        .type-card p {
+
+            line-height: 1.7;
+
+            color: #666;
+        }
+
+
+        /* 遊戲特色 */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+
+            margin-bottom: 60px;
+        }
+
+        .feature {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            text-align: center;
+        }
+
+        .feature-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+
+            font-size: 23px;
+
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+
+            line-height: 1.8;
+        }
+
+
+        /* 我的心得 */
+
+        .my-thought {
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+            margin-bottom: 50px;
+        }
+
+        .my-thought h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .my-thought p {
+
+            font-size: 18px;
+
+            line-height: 2;
+        }
+
+
+        /* 返回首頁 */
+
+        .back-button {
+
+            display: block;
+
+            width: fit-content;
+
+            margin: 20px auto 70px;
+
+            padding: 12px 28px;
+
+            background: #333;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+        }
+
+        .back-button:hover {
+
+            background: #555;
+        }
+
+
+        /* Footer */
+
+        footer {
+
+            text-align: center;
+
+            padding: 30px;
+
+            background: #222;
+
+            color: white;
+        }
+
+
+        /* 手機版 */
+
+        @media (max-width: 768px) {
+
+            .pikmin-header h1 {
+                font-size: 45px;
+            }
+
+            .intro {
+                flex-direction: column;
+            }
+
+            .intro img {
+                width: 100%;
+            }
+
+            .pikmin-types,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- 導覽列 -->
+
+<nav>
+
+    <h2>我的學習歷程</h2>
+
+    <div>
+
+        <a href="/">首頁</a>
+
+        <a href="/#about">關於我</a>
+
+        <a href="/activities">課外活動</a>
+
+        <a href="/#portfolio">作品集</a>
+
+        <a href="/pikmin">Pikmin</a>
+
+    </div>
+
+</nav>
+
+
+<!-- Hero -->
+
+<header class="pikmin-header">
+
+    <div>
+
+        <h1>🌱 Pikmin</h1>
+
+        <p>
+            探索、策略與冒險的奇妙世界
+        </p>
+
+        <p>
+            一款讓我印象深刻的遊戲
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- 主要內容 -->
+
+<main class="pikmin-container">
+
+
+    <!-- 遊戲介紹 -->
+
+    <section>
+
+        <h2 class="section-title">
+            🎮 關於 Pikmin
+        </h2>
+
+        <div class="intro">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/pikmin.jpg'
+                ) }}"
+                alt="Pikmin 遊戲"
+            >
+
+            <div class="intro-text">
+
+                <h2>什麼是 Pikmin？</h2>
+
+                <p>
+                    Pikmin 是任天堂推出的策略與冒險類型
+                    電子遊戲系列。玩家會在充滿未知的環境
+                    中進行探索，並透過帶領不同種類的 Pikmin
+                    完成任務。
+                </p>
+
+                <p>
+                    遊戲結合探索、資源管理、解謎與策略，
+                    玩家需要觀察環境，選擇適合的 Pikmin，
+                    才能順利完成挑戰。
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Pikmin 類型 -->
+
+    <section>
+
+        <h2 class="section-title">
+            🌱 不同的 Pikmin
+        </h2>
+
+        <div class="pikmin-types">
+
+
+            <div class="type-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/red-pikmin.png'
+                    ) }}"
+                    alt="紅色 Pikmin"
+                >
+
+                <h3>🔴 紅色 Pikmin</h3>
+
+                <p>
+                    具有較強的攻擊能力，
+                    並且能抵抗火焰。
+                </p>
+
+            </div>
+
+
+            <div class="type-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/yellow-pikmin.png'
+                    ) }}"
+                    alt="黃色 Pikmin"
+                >
+
+                <h3>🟡 黃色 Pikmin</h3>
+
+                <p>
+                    可以處理電力相關的障礙，
+                    也是探索時的重要夥伴。
+                </p>
+
+            </div>
+
+
+            <div class="type-card">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/blue-pikmin.png'
+                    ) }}"
+                    alt="藍色 Pikmin"
+                >
+
+                <h3>🔵 藍色 Pikmin</h3>
+
+                <p>
+                    能夠在水中活動，
+                    適合處理水域中的任務。
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- 遊戲特色 -->
+
+    <section>
+
+        <h2 class="section-title">
+            ⭐ 遊戲特色
+        </h2>
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🗺️
+                </div>
+
+                <h3>探索</h3>
+
+                <p>
+                    在不同的環境中探索，
+                    發現新的地點與挑戰。
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🧠
+                </div>
+
+                <h3>策略</h3>
+
+                <p>
+                    根據不同情況選擇適合的
+                    Pikmin，思考最佳解決方式。
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🤝
+                </div>
+
+                <h3>團隊合作</h3>
+
+                <p>
+                    帶領 Pikmin 一起完成任務，
+                    體驗合作解決問題的樂趣。
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- 個人心得 -->
+
+    <section>
+
+        <div class="my-thought">
+
+            <h2>
+                💬 我的想法
+            </h2>
+
+            <p>
+                我喜歡 Pikmin 的原因，是因為它不只是單純
+                的冒險遊戲。遊戲過程需要觀察環境、思考
+                解決方法，並且選擇適合的 Pikmin。
+            </p>
+
+            <p>
+                我覺得這和學習程式設計有一些相似的地方。
+                遇到問題時，需要先分析問題，再選擇適合
+                的方法解決。這也是我喜歡這款遊戲的原因。
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- 返回首頁 -->
+
+<a href="/" class="back-button">
+    ← 回到首頁
+</a>
+
+
+<footer>
+
+    <p>
+        © 2026 我的個人網站
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
